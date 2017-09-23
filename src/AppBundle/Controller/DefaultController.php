@@ -65,8 +65,9 @@ class DefaultController extends Controller
             $ride = $result[0];
             $ride->setEndTime(new \DateTime($request->request->get('endTime')));
             $ride->setEndStation($this->getRandStation());
+        } else {
+            $ride = new Ride(new \DateTime($request->request->get('startTime')), $this->getRandStation(), $uuid, $this->getRandLine());
         }
-        $ride = new Ride(new \DateTime($request->request->get('startTime')), $this->getRandStation(), $uuid, $this->getRandLine());
 
         $om->persist($ride);
         $om->flush();
