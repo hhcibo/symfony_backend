@@ -43,7 +43,7 @@ class Ride
     private $startTime;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      *
      * @var datetime
      */
@@ -71,7 +71,7 @@ class Ride
     private $line;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=false)
      *
      * @var string
      */
@@ -83,12 +83,16 @@ class Ride
      * @param DateTime $startTime
      * @param string $startStation
      * @param string $uuid
+     * @param $line
      */
-    public function __construct(DateTime $startTime, string $startStation, string $uuid)
+    public function __construct(DateTime $startTime, $startStation, $uuid, $line)
     {
         $this->startTime = $startTime;
         $this->startStation = $startStation;
+        $this->line = $line;
         $this->uuid = $uuid;
+
+        $this->endStation = '';
     }
 
     /**

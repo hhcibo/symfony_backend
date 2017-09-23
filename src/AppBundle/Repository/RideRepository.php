@@ -12,4 +12,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class RideRepository extends EntityRepository
 {
+    public function findNotFinishedRides($uuid)
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->andWhere('r.uuid = :uuid')
+            ->andWhere('r.endTime is null');
+
+        return $qb->setParameter(':uuid', $uuid)
+            ->getQuery()
+            ->execute();
+    }
 }
